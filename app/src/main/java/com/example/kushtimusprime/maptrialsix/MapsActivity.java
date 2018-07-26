@@ -1,6 +1,7 @@
 package com.example.kushtimusprime.maptrialsix;
 
 import android.content.Context;
+import android.graphics.Camera;
 import android.location.Address;
 import android.location.Geocoder;
 import android.support.v4.app.FragmentActivity;
@@ -9,6 +10,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -27,12 +29,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     Context mContext=this;
     private EditText addressEditText;
     private Button addressButton;
+    private ImageButton zoomInButton;
+    private ImageButton zoomOutButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         addressEditText=findViewById(R.id.addressEditText);
         addressButton=findViewById(R.id.addressButton);
+        zoomInButton=findViewById(R.id.zoomInButton);
+        zoomOutButton=findViewById(R.id.zoomOutButton);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -52,6 +58,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        float cityLevel=12.0f;
+        LatLng columbus=new LatLng(39.9612,-82.9988);
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(columbus,cityLevel));
         addressButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -71,6 +80,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 } else {
                     Toast.makeText(mContext,"Please type an address",Toast.LENGTH_LONG).show();
                 }
+            }
+        });
+        zoomInButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mMap.moveCamera(CameraUpdateFactory.zoomIn());
+            }
+        });
+        zoomOutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mMap.moveCamera(CameraUpdateFactory.zoomOut());
             }
         });
         // Add a marker in Sydney and move the camera
