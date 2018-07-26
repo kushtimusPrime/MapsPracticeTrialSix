@@ -1,9 +1,11 @@
 package com.example.kushtimusprime.maptrialsix;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Camera;
 import android.location.Address;
 import android.location.Geocoder;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -31,6 +33,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private Button addressButton;
     private ImageButton zoomInButton;
     private ImageButton zoomOutButton;
+    private FloatingActionButton sendToMainActivity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +42,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         addressButton=findViewById(R.id.addressButton);
         zoomInButton=findViewById(R.id.zoomInButton);
         zoomOutButton=findViewById(R.id.zoomOutButton);
+        sendToMainActivity=findViewById(R.id.sendToMainActivity);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -92,6 +96,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
             public void onClick(View view) {
                 mMap.moveCamera(CameraUpdateFactory.zoomOut());
+            }
+        });
+        sendToMainActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent sendToMain=new Intent(MapsActivity.this,TrialFragment.class);
+                startActivity(sendToMain);
             }
         });
         // Add a marker in Sydney and move the camera
