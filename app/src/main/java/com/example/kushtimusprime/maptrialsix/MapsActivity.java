@@ -40,6 +40,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         setContentView(R.layout.activity_maps);
         Intent sendToMain=new Intent(MapsActivity.this,TrialFragment.class);
         startActivity(sendToMain);
+        finish();
         /*addressEditText=findViewById(R.id.addressEditText);
         addressButton=findViewById(R.id.addressButton);
         zoomInButton=findViewById(R.id.zoomInButton);
