@@ -38,7 +38,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
-        addressEditText=findViewById(R.id.addressEditText);
+        Intent sendToMain=new Intent(MapsActivity.this,TrialFragment.class);
+        startActivity(sendToMain);
+        /*addressEditText=findViewById(R.id.addressEditText);
         addressButton=findViewById(R.id.addressButton);
         zoomInButton=findViewById(R.id.zoomInButton);
         zoomOutButton=findViewById(R.id.zoomOutButton);
@@ -46,7 +48,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
+        mapFragment.getMapAsync(this);*/
     }
 
 
@@ -61,7 +63,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
+        /*mMap = googleMap;
         float cityLevel=12.0f;
         LatLng columbus=new LatLng(39.9612,-82.9988);
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(columbus,cityLevel));
@@ -111,7 +113,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker at my house"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));*/
     }
-    public ArrayList getLocationFromAddress(String strAddress){
+    /*public ArrayList getLocationFromAddress(String strAddress){
 
         Geocoder coder = new Geocoder(this);
         List<Address> address;
@@ -139,5 +141,5 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         }
         return p1;
-    }
+    }*/
 }
