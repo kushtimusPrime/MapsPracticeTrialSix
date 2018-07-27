@@ -19,6 +19,8 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.Marker;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,6 +62,24 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
         float cityLevel=12.0f;
         LatLng columbus=new LatLng(39.9612,-82.9988);
+        //info window tester stuff
+        LatLng melsHouse = new LatLng(40.057613, -83.082275);
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.position(melsHouse)
+                .title("Mel's House")
+                .snippet("This is where I live")
+                .icon(BitmapDescriptorFactory.defaultMarker( BitmapDescriptorFactory.HUE_BLUE));
+        InfoWindowData info = new InfoWindowData();
+        info.setImage("snowqualmie"); //idk if it can find this image? this is just the example
+        info.setDateOfEvent("I am here every day"); //hotel and food were the defaults it gave but we can change
+        info.setTickets("No tickets available");
+        info.setTransport("Reach the site by bus, car and train.");
+        CustomInfoWindow customInfoWindow = new CustomInfoWindow(this);
+        mMap.setInfoWindowAdapter(customInfoWindow);
+        Marker m = mMap.addMarker(markerOptions);
+        m.setTag(info);
+        m.showInfoWindow();
+
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(columbus,cityLevel));
         addressButton.setOnClickListener(new View.OnClickListener() {
             @Override

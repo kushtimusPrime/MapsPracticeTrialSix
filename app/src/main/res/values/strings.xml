@@ -3,4 +3,5 @@
     <string name="title_activity_maps">Map</string>
     <string name="typeAddHint">Type Destination Address Here</string>
     <string name="addressButtonText">Click Here to Place Marker</string>
+    <string name="picture">picture</string>
 </resources>
