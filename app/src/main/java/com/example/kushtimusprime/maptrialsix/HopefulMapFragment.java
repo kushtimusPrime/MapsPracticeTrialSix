@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
+import android.widget.ImageView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -45,6 +46,7 @@ public class HopefulMapFragment extends Fragment implements OnMapReadyCallback{
     private ImageButton zoomOutButton;
     private boolean infoWindowIsShow = false;
     private Marker lastMarker;
+
     public HopefulMapFragment() {
         // Required empty public constructor
     }
