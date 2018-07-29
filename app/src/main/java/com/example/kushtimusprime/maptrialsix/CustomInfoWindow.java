@@ -29,7 +29,7 @@ public class CustomInfoWindow implements GoogleMap.InfoWindowAdapter {
 
         TextView name_tv = view.findViewById(R.id.name);
         TextView details_tv = view.findViewById(R.id.details);
-        ImageView img = view.findViewById(R.id.pic);
+        ImageView img = view.findViewById(R.id.image);
 
         TextView dateOfEvent_tv = view.findViewById(R.id.dateOfEvent);
         TextView tickets_tv = view.findViewById(R.id.tickets);
