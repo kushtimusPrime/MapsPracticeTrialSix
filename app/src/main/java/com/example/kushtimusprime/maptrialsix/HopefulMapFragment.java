@@ -148,6 +148,7 @@ public class HopefulMapFragment extends Fragment implements OnMapReadyCallback{
                         }
                     } else {
                         //это щелчок по другому маркеру
+                        //предыдущего
                         if (infoWindowIsShow) {//если открыто инфовиндов предыдущего маркера, скрываем его
                             lastMarker.hideInfoWindow();
                             //и отображаем для нового
