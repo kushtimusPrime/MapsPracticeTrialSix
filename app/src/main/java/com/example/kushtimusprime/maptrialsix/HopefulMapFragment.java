@@ -43,7 +43,8 @@ public class HopefulMapFragment extends Fragment implements OnMapReadyCallback{
     private Button addressButton;
     private ImageButton zoomInButton;
     private ImageButton zoomOutButton;
-
+    private boolean infoWindowIsShow = false;
+    private Marker lastMarker;
     public HopefulMapFragment() {
         // Required empty public constructor
     }
@@ -93,10 +94,9 @@ public class HopefulMapFragment extends Fragment implements OnMapReadyCallback{
         info.setTransport("Reach the site by bus, car and train.");
         CustomInfoWindow customInfoWindow = new CustomInfoWindow(this.getActivity());
         mGoogleMap.setInfoWindowAdapter(customInfoWindow);
-        Marker m = mGoogleMap.addMarker(markerOptions);
-        m.setTag(info);
-        m.showInfoWindow();
-
+        Marker mel = mGoogleMap.addMarker(markerOptions);
+        mel.setTag(info);
+        //mel.showInfoWindow();
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(columbus,cityLevel));
         addressButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -129,6 +129,38 @@ public class HopefulMapFragment extends Fragment implements OnMapReadyCallback{
             @Override
             public void onClick(View view) {
                 googleMap.moveCamera(CameraUpdateFactory.zoomOut());
+            }
+        });
+        mGoogleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                    if (lastMarker == null) {
+                        marker.showInfoWindow();
+                        lastMarker = marker;
+                        infoWindowIsShow = true;
+                    } else if (marker.getId().equals(lastMarker.getId())) {
+                        if (infoWindowIsShow) {
+                            marker.hideInfoWindow();
+                            infoWindowIsShow = false;
+                        } else {
+                            marker.showInfoWindow();
+                            infoWindowIsShow = true;
+                        }
+                    } else {
+                        //это щелчок по другому маркеру
+                        if (infoWindowIsShow) {//если открыто инфовиндов предыдущего маркера, скрываем его
+                            lastMarker.hideInfoWindow();
+                            //и отображаем для нового
+                            marker.showInfoWindow();
+                            infoWindowIsShow = true;
+                            lastMarker = marker;
+                        } else {
+                            marker.showInfoWindow();
+                            infoWindowIsShow = true;
+                            lastMarker = marker;
+                        }
+                    }
+                    return true;
             }
         });
     }
